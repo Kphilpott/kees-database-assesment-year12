@@ -1,5 +1,6 @@
-const USER = localStorage.getItem('USER');
+
 console.log("START");
+console.log(firebase);
 
 ///A little setup for a test
 const VELARRAY = [-1, 1];
@@ -41,8 +42,9 @@ function setup() {
 	alienGroup = new Group();
 	aliens();
 	console.log("Aliens Spawned")
-	console.log("Current Version: 1.6.3 'Difficulty Tweak' Part 3");
+	console.log("Current Version: 1.6.3");
 	console.log("Thank you for playing!");
+	
 	
 };
 
@@ -77,6 +79,7 @@ function aliens() {
 function death() {
 	ALIVE = false;
 	console.log("You Died! Final Score: " + score);
+	fb_write();
 };
 
 
@@ -110,7 +113,7 @@ if (ALIVE == true) {
 
 if (ALIVE == false) {
 	ScoreNumber.textContent = ("You Died! Final Score: ") + score;
-	fb_write();
+	
 return;
 };
 
@@ -122,21 +125,18 @@ return;
 
 function writeForm(){
     // Get the form data
+console.log("Hello World");
 
 
 
     firebase.database().ref('/users/' + GLOBAL_user.uid).set(
       {
-        Username: UserName,
         Email: GLOBAL_user.email,
         Pfp: GLOBAL_user.photoURL,
         DisplayName: GLOBAL_user.displayName,
 		DodgetheBallsScore: score,
       }
     )
-
-    document.getElementById("ThankYou").innerHTML = "Thank You!";
-    document.getElementById("statusMessage").innerHTML = "Order Pending. Warning: making another order will override your previous order!"
 }
 
 
@@ -147,3 +147,45 @@ function fb_write() {
 
    writeForm()
 }
+
+
+var GLOBAL_user;
+var authenticationListener;
+
+
+function fb_popuplogin() {
+  var provider = new firebase.auth.GoogleAuthProvider();
+
+  firebase.auth().signInWithPopup(provider).then((result) => {
+    GLOBAL_user = result.user; //save the user details as global value
+    console.log("User has logged in.");
+  });
+}
+
+
+function fb_login() {
+  authenticationListener = firebase.auth().onAuthStateChanged(fb_HandleLogin);
+  document.getElementById("Logout").style.display = "block";
+  document.getElementById("Login").style.display = "none";
+}
+
+function fb_HandleLogin(_user) {
+  if (_user) {
+    console.log("User is logged in.");
+    GLOBAL_user = _user; //save the user details as global value
+    setup();
+    document.getElementById("submit").style.display = "block";
+
+  } else {
+    console.log("User is NOT logged in, starting the popup process.");
+    fb_popuplogin();
+  }
+}
+
+function fb_logout() {
+  authenticationListener();
+  firebase.auth().signOut();
+  document.getElementById("Logout").style.display = "none";
+  document.getElementById("Login").style.display = "block";
+}
+
