@@ -11,17 +11,27 @@
 
     <script src="fb_setup.js"></script>
   <script src="fb_io.js"></script>
+  <script src="login.js"></script>
 </head>
 
 <body>
-<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="style.css">
 
-<button id="Login" onclick="fb_login()">Login with Google</button><button id="Logout" style="display: none;" onclick="fb_logout()">Logout</button>
+
 
     <div class="container">
-<a href="dodgetheballs.html" ><button>
+        <button id="Login" onclick="fb_login(), ShowButtons()">Login with Google</button><button id="Logout" style="display: none;" onclick="fb_logout()">Logout</button>
+        <div>
+            <p> </p>
+        </div>
+        <p id = "Logintext">Make sure to Login!</p>
+        </div>
+    <div class="container" id="Games" hidden>
+<p>Here are our games!</p>
+        <a href="dodgetheballs.html"><button>
     Dodge the Balls
 </button></a>
+<div><p></p></div>
 <a href="GeoDash.html" class="btn-link"><button>
     Not a Geomerty Dash Ripoff
 </button></a>

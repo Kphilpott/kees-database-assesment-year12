@@ -6,6 +6,7 @@
 //
 // Written by Mr Britton
 /*******************************************************/
+fb_silentLogin();
 console.log("Running the game");
 
 
@@ -16,6 +17,7 @@ function endGame(_player, _obstacle){
     player.remove();
     obstacles.removeAll();
     // Put your database writes here:
+    fb_writeGdash();
 
 
 
