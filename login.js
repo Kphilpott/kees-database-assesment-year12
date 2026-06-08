@@ -38,7 +38,7 @@ function fb_HandleLogin(_user) {
     console.log("User is logged in.");
     GLOBAL_user = _user; //save the user details as global value
     console.log(GLOBAL_user);
-
+    
   } else {
     console.log("User is NOT logged in, starting the popup process.");
     fb_popuplogin();
