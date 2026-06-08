@@ -6,6 +6,7 @@ var authenticationListener;
 
 function ShowButtons() {
 document.getElementById("Games").hidden = false;
+document.getElementById("Loginbuttonbox").hidden = true;
 document.getElementById("Logintext").innerHTML = "Thank you for logging in!";
 
 }
