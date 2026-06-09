@@ -28,6 +28,7 @@ console.log("Hello World");
 		DodgetheBallsScore: score,
       }
     )
+    document.getElementById("DodgeScore").innerHTML = "Your last Score was: " + score;
 }
 
 function writeFormGDash() {
@@ -44,6 +45,7 @@ console.log("Hello World");
 		GDashScore: score,
       }
     )
+    document.getElementById("GDashScoreText").innerHTML = "Your last Score was: " + score;
 }
 
 
