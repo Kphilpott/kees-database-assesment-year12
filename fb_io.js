@@ -28,7 +28,7 @@ console.log("Hello World");
 		DodgetheBallsScore: score,
       }
     )
-    document.getElementById("DodgeScore").innerHTML = "Your last Score was: " + score;
+    document.getElementById("DodgeScore").innerHTML = "Version 1.6.3.  Your last Score was: " + score;
 }
 
 function writeFormGDash() {
