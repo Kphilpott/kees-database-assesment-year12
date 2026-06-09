@@ -13,6 +13,10 @@
   <script src="fb_io.js"></script>
   <script src="login.js"></script>
   <title>Luna Industries Employee Entertaintment System (Prototype)</title>
+  <style>
+    body {display: grid;
+    place-items: center;}
+  </style>
 </head>
 
 <body>
@@ -27,8 +31,13 @@
         </div>
         <p id = "Logintext">Make sure to Login!</p>
         </div>
+        <div class="container" id="accountbox" hidden>
+            <p>LOGGED IN ACCOUNT:</p>
+            <div><p> </p></div>
+            <img src="" id="pfpImg" width="25" height="25" ><span id="NameAnnounce">test</span>
+        </div>
+        <div><p> </p></div>
     <div class="container" id="Games" hidden>
-        <img src="" id="pfpImg" width="25" height="25" ><span id="NameAnnounce">test</span>
 <p>Here are our games!</p>
         <a href="dodgetheballs.html"><button>
     Dodge the Balls
