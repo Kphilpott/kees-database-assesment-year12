@@ -14,6 +14,7 @@ var score = 0;
 
 
 function setup() {
+	//create canvas
 	console.log("setup: Canvas and World");
 	cnv = new Canvas(800, 800);
 	world.gravity.y = 0;
@@ -79,6 +80,7 @@ function aliens() {
 
 
 function death() {
+	//sets alive to false and starts a firebase write
 	ALIVE = false;
 	console.log("You Died! Final Score: " + score);
 	fb_write();

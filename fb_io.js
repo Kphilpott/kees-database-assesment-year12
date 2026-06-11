@@ -15,11 +15,7 @@ function fb_error(){
 }
 
 function writeForm(){
-    // Get the form data
-console.log("Hello World");
-
-
-
+///Writes and updates data for DtB into firebase
     firebase.database().ref('/users/' + GLOBAL_user.uid).update(
       {
         Email: GLOBAL_user.email,
@@ -32,11 +28,7 @@ console.log("Hello World");
 }
 
 function writeFormGDash() {
-    // Get the form data
-console.log("Hello World");
-
-
-
+///Writes and updates data for GDash into firebase
     firebase.database().ref('/users/' + GLOBAL_user.uid).update(
       {
         Email: GLOBAL_user.email,
@@ -49,11 +41,7 @@ console.log("Hello World");
 }
 
 function writeFormStartUp() {
-    // Get the form data
-console.log("Hello World");
-
-
-
+///Writes and updates data on login to show a user has logged in even if they never played a game
     firebase.database().ref('/users/' + GLOBAL_user.uid).update(
       {
         Email: GLOBAL_user.email,
@@ -68,14 +56,14 @@ function fb_write() {
     console.log("Writing Online.");
 
 
-   writeForm()
+   writeForm();
 }
 
 function fb_writeGdash() {
     console.log("Writing Online.");
 
 
-   writeFormGDash()
+   writeFormGDash();
 }
 
 
@@ -85,7 +73,7 @@ var authenticationListener;
 
 function fb_popuplogin() {
   var provider = new firebase.auth.GoogleAuthProvider();
-
+///creates a google login popup
   firebase.auth().signInWithPopup(provider).then((result) => {
     GLOBAL_user = result.user; //save the user details as global value
     console.log("User has logged in.");
@@ -100,6 +88,7 @@ function fb_login() {
 }
 
 function fb_HandleLogin(_user) {
+///detects if a user is already logged in or not
   if (_user) {
     console.log("User is logged in.");
     GLOBAL_user = _user; //save the user details as global value
@@ -111,6 +100,7 @@ function fb_HandleLogin(_user) {
 }
 
 function fb_logout() {
+  //logs the user out
   authenticationListener();
   firebase.auth().signOut();
   document.getElementById("Logout").style.display = "none";
