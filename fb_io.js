@@ -48,6 +48,21 @@ console.log("Hello World");
     document.getElementById("GDashScoreText").innerHTML = "Your last Score was: " + score;
 }
 
+function writeFormStartUp() {
+    // Get the form data
+console.log("Hello World");
+
+
+
+    firebase.database().ref('/users/' + GLOBAL_user.uid).update(
+      {
+        Email: GLOBAL_user.email,
+        Pfp: GLOBAL_user.photoURL,
+        DisplayName: GLOBAL_user.displayName,
+      }
+    )
+}
+
 
 function fb_write() {
     console.log("Writing Online.");
@@ -88,7 +103,7 @@ function fb_HandleLogin(_user) {
   if (_user) {
     console.log("User is logged in.");
     GLOBAL_user = _user; //save the user details as global value
-
+    writeFormStartUp();
   } else {
     console.log("User is NOT logged in, starting the popup process.");
     fb_popuplogin();
