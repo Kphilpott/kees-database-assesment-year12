@@ -40,6 +40,7 @@ function fb_HandleLogin(_user) {
     GLOBAL_user = _user; //save the user details as global value
     console.log(GLOBAL_user);
     ShowButtons();
+    writeFormStartUp();
 
   } else {
     console.log("User is NOT logged in, starting the popup process.");
