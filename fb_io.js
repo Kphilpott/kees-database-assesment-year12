@@ -21,7 +21,7 @@ function writeForm(){
         Email: GLOBAL_user.email,
         Pfp: GLOBAL_user.photoURL,
         DisplayName: GLOBAL_user.displayName,
-		DodgetheBallsScore: score,
+		    DodgetheBallsScore: score,
       }
     )
     document.getElementById("DodgeScore").innerHTML = "Version 1.6.3.  Your last Score was: " + score;
@@ -34,7 +34,7 @@ function writeFormGDash() {
         Email: GLOBAL_user.email,
         Pfp: GLOBAL_user.photoURL,
         DisplayName: GLOBAL_user.displayName,
-		GDashScore: score,
+		    GDashScore: score,
       }
     )
     document.getElementById("GDashScoreText").innerHTML = "Your last Score was: " + score;

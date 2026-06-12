@@ -38,7 +38,6 @@ function fb_HandleLogin(_user) {
   if (_user) {
     console.log("User is logged in.");
     GLOBAL_user = _user; //save the user details as global value
-    console.log(GLOBAL_user);
     ShowButtons();
     writeFormStartUp();
 
