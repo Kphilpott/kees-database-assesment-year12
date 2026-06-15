@@ -10,15 +10,24 @@ const LENGTH = 680;
 const HEIGHT = 15;
 var ALIVE = true;
 var score = 0;
-
+var gamestarted = false;
 
 
 function setup() {
+	gamestarted == false;
 	//create canvas
 	console.log("setup: Canvas and World");
 	cnv = new Canvas(800, 800);
 	world.gravity.y = 0;
+};
+
+function startGame() {
+	ALIVE = true;
+	score = 0;
+	gamestarted = true;
 	playerGroup = new Group();
+	document.getElementById("retryButton").hidden = true;
+	document.getElementById("StartButton").hidden = true;
 
 	///Create the player named "bob"
 	bob = new Sprite(180, 120, 30, 35, 'd');
@@ -39,23 +48,29 @@ function setup() {
 	platform_2.color = 'blue';
 	platform_3.color = 'blue';
 	platform_4.color = 'blue';
+	wallGroup = new Group();
+	wallGroup.add(platform_1);
+	wallGroup.add(platform_2);
+	wallGroup.add(platform_3);
+	wallGroup.add(platform_4);
 	console.log("setup: walls done");
 
 	//create alien group and run function to spawn them, then log it.
 	alienGroup = new Group();
 	aliens();
 	console.log("Aliens Spawned")
-	console.log("Current Version: 1.6.3");
+	console.log("Current Version: 1.6.6");
 	console.log("Thank you for playing!");
 	
 	
-};
+}
 
 function func2Call(_alien, _playerGroup) {
 
 	// Delete the aliens and player when they touch, requiring a page reload after.
 	alienGroup.deleteAll();
 	playerGroup.deleteAll();
+	wallGroup.deleteAll();
 	death();
 
 }
@@ -84,6 +99,9 @@ function death() {
 	ALIVE = false;
 	console.log("You Died! Final Score: " + score);
 	fb_write();
+	ScoreNumber.textContent = ("You Died! Final Score: ") + score;
+	gamestarted == false;
+	score = 0;
 };
 
 
@@ -110,15 +128,14 @@ function draw() {
 		bob.vel.y = 3.5;
 	}
 
-if (ALIVE == true) {
+if (gamestarted == true) {
 	score = score + 0.01;
 	ScoreNumber.textContent = ("Score: ") + score;
 };
 
 if (ALIVE == false) {
-	ScoreNumber.textContent = ("You Died! Final Score: ") + score;
-	
-return;
+
+ document.getElementById("retryButton").hidden = false;
 };
 
 
