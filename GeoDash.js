@@ -82,6 +82,7 @@ function setup() {
 
     floor =  new Sprite(SCREEN_WIDTH/2,  SCREEN_HEIGHT, SCREEN_WIDTH, 4, 's');
     floor.color = color("black");
+    floor.bounciness = 0;
     world.gravity.y = 80;
     
     document.addEventListener("keydown", 
@@ -144,7 +145,7 @@ function gameScreen(){
     score++;
     if(frameCount> nextSpawn){
         newObstacle();
-        nextSpawn = frameCount + random(10,100);
+        nextSpawn = frameCount + random(30,100);
     }
     textSize(32);
     fill(255);
@@ -171,6 +172,8 @@ function endScreen(){
 function resetGame(){
     player = new Sprite(PLAYER_WIDTH*1.2,  SCREEN_HEIGHT/2, PLAYER_WIDTH, PLAYER_HEIGHT, 'd');
     player.color = color("purple");
+    player.bounciness = 0;
+    player.friction = 50;
     player.collides(obstacles, endGame);
     score = 0;
 }
