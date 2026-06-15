@@ -27,13 +27,22 @@
     <div class="container" id="Loginbuttonbox">
         <img src="Luna Industries Logonobg.png" width="515" height="300">
         <div></div>
-        <button id="Login" onclick="fb_login()">Login with Google</button><button id="Logout" style="display: none;" onclick="fb_logout()">Logout</button>
+        <form id="shipForm">
+      <label for="name">Your Name:</label>
+      <input type="text" id="name" name="name" required />
+
+      <label for="age">Age:</label>
+      <input type="text" id="FormAge" name="age" required />
+
+    </form>
+<button id="submit" onclick="fb_login()">Submit</button>
         <div>
             <p> </p>
         </div>
         <p id = "Logintext">Make sure to Login!</p>
-        </div>
-   
+
+
+
     <div class="container" id="Games" hidden>
         <img src="Luna Industries Logonobg.png" width="515" height="300">
         <div class="container">
