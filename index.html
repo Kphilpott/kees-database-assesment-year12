@@ -1,53 +1,72 @@
 <head>
 
 
-      <!-- firebase start ****************************************-->
-  <!-- Firebase App (core Firebase SDK) is always required & must be listed 1st -->
-  <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-app.js"></script>
-  <!-- Add Firebase products that you want to use -->
-  <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-database.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-analytics.js"></script>
+    <!-- firebase start ****************************************-->
+    <!-- Firebase App (core Firebase SDK) is always required & must be listed 1st -->
+    <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-app.js"></script>
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-analytics.js"></script>
 
     <script src="fb_setup.js"></script>
-  <script src="fb_io.js"></script>
-  <script src="login.js"></script>
-  <title>Luna Industries Employee Entertaintment System (Prototype)</title>
-  <style>
-    body {display: grid;
-    place-items: center;}
-  </style>
+    <script src="fb_io.js"></script>
+    <script src="login.js"></script>
+    <title>Luna Industries Employee Entertaintment System (Prototype)</title>
+    <style>
+        body {
+            display: grid;
+            place-items: center;
+        }
+    </style>
 </head>
 
 <body>
-<link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
 
 
 
     <div class="container" id="Loginbuttonbox">
         <img src="Luna Industries Logonobg.png" width="515" height="300">
         <div></div>
-        <button id="Login" onclick="fb_login()">Login with Google</button><button id="Logout" style="display: none;" onclick="fb_logout()">Logout</button>
+        <button id="Login" onclick="fb_login() + showform()">Login with Google</button><button id="Logout" style="display: none;"
+            onclick="fb_logout()">Logout</button>
+
         <div>
             <p> </p>
         </div>
-        <p id = "Logintext">Make sure to Login!</p>
-        </div>
-   
+                <form id="shipForm" hidden>
+            <label for="name">Your Name:</label>
+            <input type="text" id="name" name="name" required />
+
+            <label for="age">Age:</label>
+            <input type="number" id="FormAge" name="age" required />
+
+        </form>
+        <button id="submit" onclick="writeUserAge() + ShowButtons()" hidden>Submit</button>
+        <p id="Logintext">Make sure to Login!</p>
+    </div>
+
+
+
     <div class="container" id="Games" hidden>
         <img src="Luna Industries Logonobg.png" width="515" height="300">
         <div class="container">
             <p><small>Logged in as:</small></p>
-            <img src="" id="pfpImg" width="25" height="25" ><span id="NameAnnounce">test</span></div>
-<p>Below are our games!</p>
+            <img src="" id="pfpImg" width="25" height="25"><span id="NameAnnounce">test</span>
+        </div>
+        <p>Below are our games!</p>
         <a href="dodgetheballs.html"><button>
-    Dodge the Balls
-</button></a>
-<div><p></p></div>
-<a href="GeoDash.html" class="btn-link"><button>
-    Not a Geomerty Dash Ripoff
-</button></a>
+                Dodge the Balls
+            </button></a>
+        <div>
+            <p></p>
+        </div>
+        <a href="GeoDash.html" class="btn-link"><button>
+                Not a Geomerty Dash Ripoff
+            </button></a>
 
-</div>
+
+    </div>
 
 </body>

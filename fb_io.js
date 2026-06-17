@@ -51,6 +51,23 @@ function writeFormStartUp() {
     )
 }
 
+function writeUserAge() {
+///Writes and updates data when submitting the form for age and username
+const UserAge = document.getElementById("FormAge").value;
+const UserName = document.getElementById("name").value;
+    firebase.database().ref('/users/' + GLOBAL_user.uid).update(
+      {
+        Age: UserAge,
+        Username: UserName,
+      }
+    )
+    ShowButtons();
+}
+
+function showform() {
+document.getElementById("shipForm").hidden = false;
+document.getElementById("submit").hidden = false;
+}
 
 function fb_write() {
     console.log("Writing Online.");
@@ -85,6 +102,7 @@ function fb_login() {
   authenticationListener = firebase.auth().onAuthStateChanged(fb_HandleLogin);
   document.getElementById("Logout").style.display = "block";
   document.getElementById("Login").style.display = "none";
+  showform();
 }
 
 function fb_HandleLogin(_user) {
@@ -93,6 +111,7 @@ function fb_HandleLogin(_user) {
     console.log("User is logged in.");
     GLOBAL_user = _user; //save the user details as global value
     writeFormStartUp();
+    document.getElementById("formbox").hidden = false;
   } else {
     console.log("User is NOT logged in, starting the popup process.");
     fb_popuplogin();
