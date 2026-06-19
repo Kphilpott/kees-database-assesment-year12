@@ -28,6 +28,7 @@ function startGame() {
 	playerGroup = new Group();
 	document.getElementById("retryButton").hidden = true;
 	document.getElementById("StartButton").hidden = true;
+	document.getElementById("ScoreNumber").hidden = false;
 
 	///Create the player named "bob"
 	bob = new Sprite(180, 120, 30, 35, 'd');
@@ -102,6 +103,7 @@ function death() {
 	ScoreNumber.textContent = ("You Died! Final Score: ") + score;
 	gamestarted == false;
 	score = 0;
+	document.getElementById("ScoreNumber").hidden = true;
 };
 
 

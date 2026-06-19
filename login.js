@@ -8,7 +8,7 @@ function ShowButtons() {
 document.getElementById("Games").hidden = false;
 document.getElementById("Loginbuttonbox").hidden = true;
 document.getElementById("Logintext").innerHTML = "Thank you for logging in!";
-  document.getElementById("NameAnnounce").innerHTML = document.getElementById("name").value;
+  document.getElementById("NameAnnounce").innerHTML = " " + document.getElementById("name").value;
   document.getElementById("pfpImg").src = GLOBAL_user.photoURL;
 }
 

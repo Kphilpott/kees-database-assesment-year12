@@ -6,81 +6,117 @@
  **                                                          **
  **************************************************************
  **************************************************************/
-function fb_authenticate(){
-    // authenticate with Google
+function fb_authenticate() {
+  // authenticate with Google
 }
 
-function fb_error(){
-    // Don't forget your error handling!
+function fb_error() {
+  // Don't forget your error handling!
 }
 
-function writeForm(){
-///Writes and updates data for DtB into firebase
-    firebase.database().ref('/users/' + GLOBAL_user.uid).update(
-      {
-        Email: GLOBAL_user.email,
-        Pfp: GLOBAL_user.photoURL,
-        DisplayName: GLOBAL_user.displayName,
-		    DodgetheBallsScore: score,
+function writeForm() {
+  ///Writes and updates data for DtB into firebase
+  firebase.database().ref('/users/' + GLOBAL_user.uid).update(
+    {
+      Email: GLOBAL_user.email,
+      Pfp: GLOBAL_user.photoURL,
+      DisplayName: GLOBAL_user.displayName,
+      DodgetheBallsScore: score,
+    }
+  )
+  writeHighScoreForm();
+
+}
+
+
+async function writeHighScoreForm() {
+  ///Writes high scores for DtB!
+  const DtBHSpath = firebase.database().ref('/users/' + GLOBAL_user.uid + '/DodgetheBallsHighScore');
+   ///checks if the path exists
+  try {
+    const snapshot = firebase.database().get(DtBHSpath);
+   ///if it exists, check if new score is higher than the old one
+    if (snapshot.exists()) {
+      const currentDtBHighScore = snapshot.val;
+      if (score > currentDtBHighScore) {
+        firebase.database().ref('/users/' + GLOBAL_user.uid).update(
+        {
+          DodgetheBallsHighScore: score,
+        }
+      )
       }
-    )
-    document.getElementById("DodgeScore").innerHTML = "Version 1.6.3.  Your last Score was: " + score;
+    }
+   ///if path does not exist, create it and set the first high score
+    else {
+      firebase.database().ref('/users/' + GLOBAL_user.uid).update(
+        {
+          DodgetheBallsHighScore: score,
+        }
+      )
+    }
+  }
+
+  
+   catch (error) {
+    console.log("WARNING CODE ERROR DETECTED");
+   };
+
 }
 
 function writeFormGDash() {
-///Writes and updates data for GDash into firebase
-    firebase.database().ref('/users/' + GLOBAL_user.uid).update(
-      {
-        Email: GLOBAL_user.email,
-        Pfp: GLOBAL_user.photoURL,
-        DisplayName: GLOBAL_user.displayName,
-		    GDashScore: score,
-      }
-    )
-    document.getElementById("GDashScoreText").innerHTML = "Your last Score was: " + score;
+  ///Writes and updates data for GDash into firebase
+  firebase.database().ref('/users/' + GLOBAL_user.uid).update(
+    {
+      Email: GLOBAL_user.email,
+      Pfp: GLOBAL_user.photoURL,
+      DisplayName: GLOBAL_user.displayName,
+      GDashScore: score,
+    }
+  )
+  document.getElementById("GDashScoreText").innerHTML = "Your last Score was: " + score;
 }
 
 function writeFormStartUp() {
-///Writes and updates data on login to show a user has logged in even if they never played a game
-    firebase.database().ref('/users/' + GLOBAL_user.uid).update(
-      {
-        Email: GLOBAL_user.email,
-        Pfp: GLOBAL_user.photoURL,
-        DisplayName: GLOBAL_user.displayName,
-      }
-    )
+  ///Writes and updates data on login to show a user has logged in even if they never played a game
+  firebase.database().ref('/users/' + GLOBAL_user.uid).update(
+    {
+      Email: GLOBAL_user.email,
+      Pfp: GLOBAL_user.photoURL,
+      DisplayName: GLOBAL_user.displayName,
+    }
+  )
 }
 
 function writeUserAge() {
-///Writes and updates data when submitting the form for age and username
-const UserAge = document.getElementById("FormAge").value;
-const UserName = document.getElementById("name").value;
-    firebase.database().ref('/users/' + GLOBAL_user.uid).update(
-      {
-        Age: UserAge,
-        Username: UserName,
-      }
-    )
-    ShowButtons();
+  ///Writes and updates data when submitting the form for age and username
+  const UserAge = document.getElementById("FormAge").value;
+  const UserName = document.getElementById("name").value;
+  firebase.database().ref('/users/' + GLOBAL_user.uid).update(
+    {
+      Age: UserAge,
+      Username: UserName,
+    }
+  )
+  ShowButtons();
 }
 
 function showform() {
-document.getElementById("shipForm").hidden = false;
-document.getElementById("submit").hidden = false;
+  document.getElementById("shipForm").hidden = false;
+  document.getElementById("submit").hidden = false;
 }
 
 function fb_write() {
-    console.log("Writing Online.");
+  console.log("Writing Online.");
 
 
-   writeForm();
+  writeForm();
 }
 
 function fb_writeGdash() {
-    console.log("Writing Online.");
+  console.log("Writing Online.");
 
 
-   writeFormGDash();
+  writeFormGDash();
 }
 
 
@@ -90,7 +126,7 @@ var authenticationListener;
 
 function fb_popuplogin() {
   var provider = new firebase.auth.GoogleAuthProvider();
-///creates a google login popup
+  ///creates a google login popup
   firebase.auth().signInWithPopup(provider).then((result) => {
     GLOBAL_user = result.user; //save the user details as global value
     console.log("User has logged in.");
@@ -106,7 +142,7 @@ function fb_login() {
 }
 
 function fb_HandleLogin(_user) {
-///detects if a user is already logged in or not
+  ///detects if a user is already logged in or not
   if (_user) {
     console.log("User is logged in.");
     GLOBAL_user = _user; //save the user details as global value
