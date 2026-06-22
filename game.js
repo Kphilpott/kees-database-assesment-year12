@@ -102,11 +102,12 @@ function death() {
 	fb_write();
 	ScoreNumber.textContent = ("You Died! Final Score: ") + score;
 	gamestarted == false;
-	score = 0;
 	document.getElementById("ScoreNumber").hidden = true;
 };
 
-
+function ScoreReset() {
+score = 0;
+}
 
 ///Draw Loop
 function draw() {

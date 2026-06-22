@@ -24,43 +24,82 @@ function writeForm() {
       DodgetheBallsScore: score,
     }
   )
-  writeHighScoreForm();
-
+  writeHighScoreForm(score);
+  document.getElementById("DodgeScore").innerHTML = "Your last Score was: " + score;
 }
 
 
-async function writeHighScoreForm() {
+async function writeHighScoreForm(_score) {
   ///Writes high scores for DtB!
-  const DtBHSpath = firebase.database().ref('/users/' + GLOBAL_user.uid + '/DodgetheBallsHighScore');
-   ///checks if the path exists
+
+  const DtBHSpath = '/users/' + GLOBAL_user.uid + '/DodgetheBallsHighScore';
+  console.log("Reading from path:", DtBHSpath);
+  ///checks if the path exists
   try {
-    const snapshot = firebase.database().get(DtBHSpath);
-   ///if it exists, check if new score is higher than the old one
+    const snapshot = await firebase.database().ref(DtBHSpath).once('value');
+    ///if it exists, check if new score is higher than the old one
     if (snapshot.exists()) {
-      const currentDtBHighScore = snapshot.val;
-      if (score > currentDtBHighScore) {
-        firebase.database().ref('/users/' + GLOBAL_user.uid).update(
-        {
-          DodgetheBallsHighScore: score,
-        }
-      )
+      const currentDtBHighScore = snapshot.val();
+      if (_score > currentDtBHighScore) {
+        await firebase.database().ref('/users/' + GLOBAL_user.uid).update(
+          {
+            DodgetheBallsHighScore: _score,
+          }
+        );
+        console.log(_score);
+        ScoreReset();
       }
     }
-   ///if path does not exist, create it and set the first high score
+    ///if path does not exist, create it and set the first high score
+    else {
+      await firebase.database().ref('/users/' + GLOBAL_user.uid).update(
+        {
+          DodgetheBallsHighScore: _score,
+        }
+      );
+      console.log(_score);
+      ScoreReset();
+    }
+  }
+
+  catch (error) {
+    console.log("WARNING CODE ERROR DETECTED");
+    console.log(error);
+  };
+
+}
+
+async function writeHighScoreFormGDash(_score) {
+  ///Writes high scores for GDash!
+  const GDashHSpath = firebase.database().ref('/users/' + GLOBAL_user.uid + '/GDashHighScore');
+  ///checks if the path exists
+  try {
+    const snapshot2 = firebase.database().get(GDashHSpath);
+    ///if it exists, check if new score is higher than the old one
+    if (snapshot2.exists()) {
+      const currentGDashHighScore = snapshot2.val();
+      if (_score > currentGDashHighScore) {
+        firebase.database().ref('/users/' + GLOBAL_user.uid).update(
+          {
+            GDashHighScore: _score,
+          }
+        )
+      }
+    }
+    ///if path does not exist, create it and set the first high score
     else {
       firebase.database().ref('/users/' + GLOBAL_user.uid).update(
         {
-          DodgetheBallsHighScore: score,
+          GDashHighScore: _score,
         }
       )
     }
   }
 
-  
-   catch (error) {
-    console.log("WARNING CODE ERROR DETECTED");
-   };
 
+  catch (error) {
+    console.log("WARNING CODE ERROR DETECTED");
+  };
 }
 
 function writeFormGDash() {
@@ -73,6 +112,7 @@ function writeFormGDash() {
       GDashScore: score,
     }
   )
+  writeHighScoreFormGDash(score);
   document.getElementById("GDashScoreText").innerHTML = "Your last Score was: " + score;
 }
 
