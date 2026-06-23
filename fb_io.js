@@ -24,7 +24,7 @@ function writeForm() {
       DodgetheBallsScore: score,
     }
   )
-  writeHighScoreForm(score) + writeLeaderboardFormDtB(score);
+  writeHighScoreForm(score);
   document.getElementById("DodgeScore").innerHTML = "Your last Score was: " + score;
 }
 
@@ -47,6 +47,7 @@ async function writeHighScoreForm(_score) {
           }
         );
         console.log(_score);
+        writeLeaderboardFormDtB(_score);
         ScoreReset();
       }
     }
@@ -58,6 +59,7 @@ async function writeHighScoreForm(_score) {
         }
       );
       console.log(_score);
+      writeLeaderboardFormDtB(_score);
       ScoreReset();
     }
   }
@@ -85,6 +87,7 @@ async function writeHighScoreFormGDash(_score) {
           }
         );
         console.log(_score);
+        writeLeaderboardFormGDash(_score);
         ScoreReset();
       }
     }
@@ -96,6 +99,7 @@ async function writeHighScoreFormGDash(_score) {
         }
       );
       console.log(_score);
+      writeLeaderboardFormGDash(_score);
       ScoreReset();
     }
   }
@@ -117,7 +121,7 @@ function writeFormGDash() {
       GDashScore: score,
     }
   )
-  writeHighScoreFormGDash(score) + writeLeaderboardFormGDash(score);
+  writeHighScoreFormGDash(score);
   
   document.getElementById("GDashScoreText").innerHTML = "Your last Score was: " + score;
 }
