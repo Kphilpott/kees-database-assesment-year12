@@ -47,7 +47,6 @@ async function writeHighScoreForm(_score) {
           }
         );
         console.log(_score);
-        writeLeaderboardFormDtB(_score);
         ScoreReset();
       }
     }
@@ -59,7 +58,6 @@ async function writeHighScoreForm(_score) {
         }
       );
       console.log(_score);
-      writeLeaderboardFormDtB(_score);
       ScoreReset();
     }
   }
@@ -87,7 +85,6 @@ async function writeHighScoreFormGDash(_score) {
           }
         );
         console.log(_score);
-        writeLeaderboardFormGDash(_score);
         ScoreReset();
       }
     }
@@ -99,7 +96,6 @@ async function writeHighScoreFormGDash(_score) {
         }
       );
       console.log(_score);
-      writeLeaderboardFormGDash(_score);
       ScoreReset();
     }
   }
@@ -210,70 +206,4 @@ function fb_logout() {
   firebase.auth().signOut();
   document.getElementById("Logout").style.display = "none";
   document.getElementById("Login").style.display = "block";
-}
-
-async function writeLeaderboardFormGDash(_score) {
-  ///Writes high scores to leaderboard for GDash!
-  const GDashLBpath = '/HighScores/' + GLOBAL_user.displayName + '/GDashHighScore';
-  const UserName = document.getElementById("name").value;
-  ///checks if the path exists
-  try {
-    const snapshot = await firebase.database().ref(GDashLBpath).once('value');
-    ///if it exists, check if new score is higher than the old one
-    if (snapshot.exists()) {
-      const currentGDashHighScore = snapshot.val();
-      if (_score > currentGDashHighScore) {
-        await firebase.database().ref('/HighScores/' + GLOBAL_user.displayName).update(
-          {
-            GDashHighScore: _score,
-          }
-        );
-      }
-    }
-    ///if path does not exist, create it and set the first high score
-    else {
-      await firebase.database().ref('/HighScores/' + GLOBAL_user.displayName).update(
-        {
-          GDashHighScore: _score,
-        }
-      );
-    }
-  }
-  catch (error) {
-    console.log("WARNING CODE ERROR DETECTED");
-    console.log(error);
-  };
-}
-
-async function writeLeaderboardFormDtB(_score) {
-  ///Writes high scores to leaderboard for DtB!
-  const DtBLBpath = '/HighScores/' + GLOBAL_user.displayName + '/DodgetheBallsHighScore';
-  const UserName = document.getElementById("name").value;
-  ///checks if the path exists
-  try {
-    const snapshot = await firebase.database().ref(DtBLBpath).once('value');
-    ///if it exists, check if new score is higher than the old one
-    if (snapshot.exists()) {
-      const currentDodgetheBallsHighScore = snapshot.val();
-      if (_score > currentDodgetheBallsHighScore) {
-        await firebase.database().ref('/HighScores/' + GLOBAL_user.displayName).update(
-          {
-            DtBHighScore: _score,
-          }
-        );
-      }
-    }
-    ///if path does not exist, create it and set the first high score
-    else {
-      await firebase.database().ref('/HighScores/' + GLOBAL_user.displayName).update(
-        {
-          DtBhHighScore: _score,
-        }
-      );
-    }
-  }
-  catch (error) {
-    console.log("WARNING CODE ERROR DETECTED");
-    console.log(error);
-  };
 }
