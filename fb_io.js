@@ -25,13 +25,12 @@ function writeForm() {
     }
   )
   writeHighScoreForm(score);
-  document.getElementById("DodgeScore").innerHTML = "Your last Score was: " + score;
 }
 
 
 async function writeHighScoreForm(_score) {
   ///Writes high scores for DtB!
-
+  
   const DtBHSpath = '/users/' + GLOBAL_user.uid + '/DodgetheBallsHighScore';
   console.log("Reading from path:", DtBHSpath);
   ///checks if the path exists
@@ -40,6 +39,7 @@ async function writeHighScoreForm(_score) {
     ///if it exists, check if new score is higher than the old one
     if (snapshot.exists()) {
       const currentDtBHighScore = snapshot.val();
+      document.getElementById("DodgeScore").innerHTML = "Your last High Score was: " + currentDtBHighScore;
       if (_score > currentDtBHighScore) {
         await firebase.database().ref('/users/' + GLOBAL_user.uid).update(
           {
@@ -69,8 +69,10 @@ async function writeHighScoreForm(_score) {
 
 }
 
+
 async function writeHighScoreFormGDash(_score) {
   ///Writes high scores for GDash!
+  
   const GDashHSpath = '/users/' + GLOBAL_user.uid + '/GDashHighScore';
   ///checks if the path exists
   try {
@@ -78,12 +80,14 @@ async function writeHighScoreFormGDash(_score) {
     ///if it exists, check if new score is higher than the old one
     if (snapshot.exists()) {
       const currentGDashHighScore = snapshot.val();
+      document.getElementById("GDashScoreText").innerHTML = "Your last High Score was: " + currentGDashHighScore;
       if (_score > currentGDashHighScore) {
         await firebase.database().ref('/users/' + GLOBAL_user.uid).update(
           {
             GDashHighScore: _score,
           }
         );
+        document.getElementById("GDashScoreText").innerHTML = "Your last Score was: " + _score;
         console.log(_score);
         ScoreReset();
       }
@@ -95,6 +99,7 @@ async function writeHighScoreFormGDash(_score) {
           GDashHighScore: _score,
         }
       );
+      document.getElementById("GDashScoreText").innerHTML = "Your last Score was: " + _score;
       console.log(_score);
       ScoreReset();
     }
@@ -118,8 +123,6 @@ function writeFormGDash() {
     }
   )
   writeHighScoreFormGDash(score);
-  
-  document.getElementById("GDashScoreText").innerHTML = "Your last Score was: " + score;
 }
 
 function writeFormStartUp() {
