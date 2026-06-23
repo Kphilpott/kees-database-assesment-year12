@@ -71,34 +71,39 @@ async function writeHighScoreForm(_score) {
 
 async function writeHighScoreFormGDash(_score) {
   ///Writes high scores for GDash!
-  const GDashHSpath = firebase.database().ref('/users/' + GLOBAL_user.uid + '/GDashHighScore');
+  const GDashHSpath = '/users/' + GLOBAL_user.uid + '/GDashHighScore';
   ///checks if the path exists
   try {
-    const snapshot2 = firebase.database().get(GDashHSpath);
+    const snapshot = await firebase.database().ref(GDashHSpath).once('value');
     ///if it exists, check if new score is higher than the old one
-    if (snapshot2.exists()) {
-      const currentGDashHighScore = snapshot2.val();
+    if (snapshot.exists()) {
+      const currentGDashHighScore = snapshot.val();
       if (_score > currentGDashHighScore) {
-        firebase.database().ref('/users/' + GLOBAL_user.uid).update(
+        await firebase.database().ref('/users/' + GLOBAL_user.uid).update(
           {
             GDashHighScore: _score,
           }
-        )
+        );
+        console.log(_score);
+        ScoreReset();
       }
     }
     ///if path does not exist, create it and set the first high score
     else {
-      firebase.database().ref('/users/' + GLOBAL_user.uid).update(
+      await firebase.database().ref('/users/' + GLOBAL_user.uid).update(
         {
           GDashHighScore: _score,
         }
-      )
+      );
+      console.log(_score);
+      ScoreReset();
     }
   }
 
 
   catch (error) {
     console.log("WARNING CODE ERROR DETECTED");
+    console.log(error);
   };
 }
 
