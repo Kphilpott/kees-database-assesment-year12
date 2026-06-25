@@ -39,8 +39,8 @@ function startGame() {
 	playerGroup.add(bob);
 	console.log("setup: player completed");
 
-     ///Walls, numbered in order of left top right bottom
-	 //first two numbers in each line of code are the coordinates it spawns at!
+	///Walls, numbered in order of left top right bottom
+	//first two numbers in each line of code are the coordinates it spawns at!
 	platform_1 = new Sprite(70, 410, HEIGHT, LENGTH, 'k');
 	platform_2 = new Sprite(410, 70, LENGTH, HEIGHT, 'k');
 	platform_3 = new Sprite(750, 410, HEIGHT, LENGTH, 'k');
@@ -62,8 +62,8 @@ function startGame() {
 	console.log("Aliens Spawned")
 	console.log("Current Version: 1.6.6");
 	console.log("Thank you for playing!");
-	
-	
+
+
 }
 
 function func2Call(_alien, _playerGroup) {
@@ -78,7 +78,7 @@ function func2Call(_alien, _playerGroup) {
 
 
 function aliens() {
-    //spawn 13 "aliens"
+	//spawn 13 "aliens"
 	for (i = 0; i < 13; i++) {
 
 		alien = new Sprite(random(425, 475), random(425, 475), 26);
@@ -89,7 +89,7 @@ function aliens() {
 		alien.drag = -0.09;
 		alien.color = 'green';
 		alienGroup.add(alien);
-        
+
 	}
 	alienGroup.collides(playerGroup, func2Call);
 }
@@ -106,7 +106,7 @@ function death() {
 };
 
 function ScoreReset() {
-score = 0;
+	score = 0;
 }
 
 ///Draw Loop
@@ -131,15 +131,15 @@ function draw() {
 		bob.vel.y = 3.5;
 	}
 
-if (gamestarted == true) {
-	score = score + 0.01;
-	ScoreNumber.textContent = ("Score: ") + score;
-};
+	if (gamestarted == true) {
+		score = score + 0.01;
+		ScoreNumber.textContent = ("Score: ") + score;
+	};
 
-if (ALIVE == false) {
+	if (ALIVE == false) {
 
- document.getElementById("retryButton").hidden = false;
-};
+		document.getElementById("retryButton").hidden = false;
+	};
 
 
 };

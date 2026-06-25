@@ -30,7 +30,7 @@ function writeForm() {
 
 async function writeHighScoreForm(_score) {
   ///Writes high scores for DtB!
-  
+
   const DtBHSpath = '/users/' + GLOBAL_user.uid + '/DodgetheBallsHighScore';
   console.log("Reading from path:", DtBHSpath);
   ///checks if the path exists
@@ -72,7 +72,7 @@ async function writeHighScoreForm(_score) {
 
 async function writeHighScoreFormGDash(_score) {
   ///Writes high scores for GDash!
-  
+
   const GDashHSpath = '/users/' + GLOBAL_user.uid + '/GDashHighScore';
   ///checks if the path exists
   try {
@@ -111,6 +111,58 @@ async function writeHighScoreFormGDash(_score) {
     console.log(error);
   };
 }
+
+async function writeHighScoretoMainDisplayDtB() {
+
+
+  const DtBHSpath = '/users/' + GLOBAL_user.uid + '/DodgetheBallsHighScore';
+  ///checks if the path exists
+  try {
+    const snapshot = await firebase.database().ref(DtBHSpath).once('value');
+    ///if it exists, set display to that score
+    if (snapshot.exists()) {
+      const currentDtBHighScore = snapshot.val();
+      document.getElementById("mainHSdisplayDtB").innerHTML = "High Score: " + currentDtBHighScore;
+    }
+    ///if path does not exist, set display to 0
+    else {
+      document.getElementById("mainHSdisplayDtB").innerHTML = "High Score: No High Score";
+    }
+  }
+
+
+  catch (error) {
+    console.log("WARNING CODE ERROR DETECTED");
+    console.log(error);
+  };
+}
+
+
+async function writeHighScoretoMainDisplayGDash() {
+
+
+  const GDashHSpath = '/users/' + GLOBAL_user.uid + '/GDashHighScore';
+  ///checks if the path exists
+  try {
+    const snapshot = await firebase.database().ref(GDashHSpath).once('value');
+    ///if it exists, set display to that score
+    if (snapshot.exists()) {
+      const currentGDashHighScore = snapshot.val();
+      document.getElementById("mainHSdisplayGDash").innerHTML = "High Score: " + currentGDashHighScore;
+    }
+    ///if path does not exist, set display to 0
+    else {
+      document.getElementById("mainHSdisplayGDash").innerHTML = "High Score: No High Score";
+    }
+  }
+
+
+  catch (error) {
+    console.log("WARNING CODE ERROR DETECTED");
+    console.log(error);
+  };
+}
+
 
 function writeFormGDash() {
   ///Writes and updates data for GDash into firebase
