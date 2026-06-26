@@ -23,38 +23,6 @@ function endGame(_player, _obstacle) {
 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 const SCREEN_WIDTH = 400;
 const SCREEN_HEIGHT = 200;
 const PLAYER_HEIGHT = 25;

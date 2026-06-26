@@ -113,8 +113,6 @@ async function writeHighScoreFormGDash(_score) {
 }
 
 async function writeHighScoretoMainDisplayDtB() {
-
-
   const DtBHSpath = '/users/' + GLOBAL_user.uid + '/DodgetheBallsHighScore';
   ///checks if the path exists
   try {
@@ -139,8 +137,6 @@ async function writeHighScoretoMainDisplayDtB() {
 
 
 async function writeHighScoretoMainDisplayGDash() {
-
-
   const GDashHSpath = '/users/' + GLOBAL_user.uid + '/GDashHighScore';
   ///checks if the path exists
   try {
@@ -163,6 +159,15 @@ async function writeHighScoretoMainDisplayGDash() {
   };
 }
 
+const HighScoresRefs = firebase.database().ref('/users');
+
+function test() {
+  firebase.database().ref('/').once('value', display);
+}
+
+function display(snapshot) {
+  console.log(snapshot.val());
+}
 
 function writeFormGDash() {
   ///Writes and updates data for GDash into firebase
