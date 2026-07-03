@@ -162,12 +162,25 @@ async function writeHighScoretoMainDisplayGDash() {
 const HighScoresRefs = firebase.database().ref('/users');
 
 function test() {
-  firebase.database().ref('/').once('value', display);
+  firebase.database().ref('/users').orderByChild('DodgetheBallsHighScore').once('value', display);
+
 }
 
 function display(snapshot) {
   console.log(snapshot.val());
+  document.getElementById("leaderboardDtB").innerHTML = snapshot.val();
+  snapshot.forEach(DtBchildList);
+  let userscores = Object.keys(snapshot.val());
+  console.log(userscores);
+  for (i = 0; i < userscores.length; i++) {
+
+  }
 }
+
+function DtBchildList(child) {
+  console.log(child.val());
+}
+
 
 function writeFormGDash() {
   ///Writes and updates data for GDash into firebase
